@@ -23,7 +23,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import AvionList from './pages/AvionList';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login';
 import Detail from './pages/Detail';
 import Assurance from './pages/Assurance';
 import AssuranceList from './pages/AssuranceList';
@@ -38,19 +38,7 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/Avions" />
-            </Route>
-            <Route path="/Avions" exact={true}>
-              <AvionList />
-            </Route>
-            <Route path="/Kilometrage/:id" exact={true}>
-              <Detail />
-            </Route>
-            <Route path="/Assurance" exact={true}>
-              <Assurance />
-            </Route>
-            <Route path="/Assurance/:liste" exact={true}>
-              <AssuranceList />
+              <Redirect to="/Login" />
             </Route>
             <Route path="/Login" exact={true}>
               <LoginPage />
