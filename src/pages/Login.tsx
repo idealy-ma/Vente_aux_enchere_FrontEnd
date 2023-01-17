@@ -1,11 +1,17 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar, NavContext } from '@ionic/react';
 import { personCircleOutline } from 'ionicons/icons';
-import { useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import './Page.css';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('responsable@gmail.com');
     const [password, setPassword] = useState('responsable');
+
+    const {navigate} = useContext(NavContext);
+
+    const redirect = useCallback((link : string)=>{
+        navigate(link,"forward")
+    },[navigate]);    
 
     function login() {
         alert("YOU HAVE TO IMPLEMENT THIS FUNCTIONNALITY");
@@ -14,6 +20,7 @@ const Login: React.FC = () => {
          */
         // alert(email);
         // alert(password);
+        redirect("/");
     }
 
     return (

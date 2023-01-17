@@ -3,7 +3,7 @@ import { paperPlane, rocket } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import DetailItem from "../components/DetailItem";
-import PlaneListeItem from "../components/PlaneListItem";
+import EnchereItem from "../components/EnchereItem";
 
 
 const AssuranceList: React.FC = ()=>{
@@ -37,7 +37,7 @@ const AssuranceList: React.FC = ()=>{
                 </IonToolbar>
                 </IonHeader>
                 <IonList>
-                    {assurance?.map((element:any)=> <PlaneListeItem plane={element.avion}/>)}
+                    {/* {assurance?.map((element:any)=> <PlaneListeItem plane={element.avion}/>)} */}
                 </IonList>
             </IonContent>
         </IonPage>

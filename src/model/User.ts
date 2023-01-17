@@ -31,7 +31,18 @@ export default class User{
     public getUserToken(): string | undefined {
         return this.userToken;
     }
+
     public setUserToken(value: string | undefined) {
         this.userToken = value;
+    }
+
+    public verifyLogin(mdp : string | undefined){
+        fetch("http://localhos:8080/clients",{
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
     }
 }

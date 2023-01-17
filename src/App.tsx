@@ -22,7 +22,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import AvionList from './pages/AvionList';
+import AvionList from './pages/ListeEnchere';
 import LoginPage from './pages/Login';
 import Detail from './pages/Detail';
 import Assurance from './pages/Assurance';

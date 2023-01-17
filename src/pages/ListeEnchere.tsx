@@ -1,17 +1,17 @@
 import { IonButtons, IonContent, IonHeader, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import PlaneListeItem from '../components/PlaneListItem';
+import EnchereItem from '../components/EnchereItem';
 import './Page.css';
 
-const AvionList: React.FC = () => {
-    const [avions, setAvion] = useState<any[]>();
+const ListeEnchere: React.FC = () => {
+    const [encheres, setEncheres] = useState<any[]>();
 
     useEffect(()=>{
-        fetch("https://alluring-coach-production.up.railway.app/avions").then((response) => {
-            return response.json();
-        }).then((liste) =>{
-            setAvion(liste.data)
-        })
+        // fetch("https://alluring-coach-production.up.railway.app/avions").then((response) => {
+        //     return response.json();
+        // }).then((liste) =>{
+        //     setAvion(liste.data)
+        // })
     },[]);
 
     return (
@@ -32,11 +32,11 @@ const AvionList: React.FC = () => {
                 </IonToolbar>
                 </IonHeader>
                 <IonList>
-                    {avions?.map((element:any)=> <PlaneListeItem plane={element}/>)}
+                    {encheres?.map((element:any)=> <EnchereItem encheres={element}/>)}
                 </IonList>
             </IonContent>
         </IonPage>
     );
 };
 
-export default AvionList;
+export default ListeEnchere;
