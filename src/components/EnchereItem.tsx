@@ -1,26 +1,38 @@
-import { IonItem, IonIcon, IonLabel, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonInput } from "@ionic/react";
-import { paperPlane, rocket, code} from "ionicons/icons";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem } from "@ionic/react";
+import { code, informationCircleOutline } from "ionicons/icons";
 import Enchere from "../model/Enchere";
 
-interface Liste{
-    encheres: Enchere;
+interface Item{
+    enchere: Enchere | undefined;
 }
 
-const EnchereItem: React.FC<Liste> = ({ encheres })=>{
+const EnchereItem: React.FC<Item> = ({ enchere })=>{
     return (
-        <IonCard>
-            <IonCardHeader>
-                <IonCardTitle>Enchere numero {encheres.getIdEnchere()}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-                <IonItem>
-                    <IonIcon icon={code}></IonIcon>
-                </IonItem>
-                <IonItem>
-                    
-                </IonItem>
-            </IonCardContent>
-        </IonCard>
+        <>
+            <IonCard>
+                <IonIcon icon={code}></IonIcon>
+                <IonCardHeader>
+                    <IonCardTitle>Enchere {enchere?.getIdEnchere()}</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                    <IonItem>
+                        <h3>{enchere?.getDescription()}</h3>
+                        <ul>
+                            <li><b>Nom produit :</b> {enchere?.getNomProduit()}</li>
+                            <li><b>Date debut :</b> {enchere?.getDateDebut()}</li>
+                            <li><b> :</b> {enchere?.getClient()?.getNom()}</li>
+                        </ul>
+                    </IonItem>
+                </IonCardContent>
+            </IonCard>
+            <IonCard>
+                <IonCardContent>
+                    <IonButton color={"success"}>
+                        Miser
+                    </IonButton>
+                </IonCardContent>
+            </IonCard>
+        </>
     );
 }
 

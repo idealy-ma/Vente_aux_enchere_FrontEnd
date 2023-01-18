@@ -54,4 +54,18 @@ export default class Enchere{
     public setClient(value: User | undefined) {
         this.client = value;
     }
+
+    public find() : void{
+        const client : User = new User();
+        client.setNom("Idealy");
+        this.setClient(client);
+
+        const categorie : Categorie = new Categorie();
+        categorie.setIdCategorie(1);
+        categorie.setNomCategorie("Bijoux");
+        this.setCategorie(categorie);
+
+        this.setNomProduit("Collier en Or");
+        this.setDateDebut("2022-12-12");
+    }
 }

@@ -27,6 +27,9 @@ import LoginPage from './pages/Login';
 import Detail from './pages/Detail';
 import Assurance from './pages/Assurance';
 import AssuranceList from './pages/AssuranceList';
+import ListeEnchere from './pages/ListeEnchere';
+import DetailsEnchere from './pages/DetailsEnchere';
+import FloatingAction from './components/FloatingAction';
 
 setupIonicReact();
 
@@ -36,12 +39,19 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu />
+          <FloatingAction />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
               <Redirect to="/Login" />
             </Route>
             <Route path="/Login" exact={true}>
               <LoginPage />
+            </Route>
+            <Route path="/Liste" exact={true}>
+              <ListeEnchere />
+            </Route>
+            <Route path="/Details/:id" exact={true}>
+              <DetailsEnchere />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

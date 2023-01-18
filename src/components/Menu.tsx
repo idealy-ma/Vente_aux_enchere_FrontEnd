@@ -23,8 +23,8 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Les Avions',
-    url: '/Avions',
+    title: 'Encheres',
+    url: '/Liste',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp
   },

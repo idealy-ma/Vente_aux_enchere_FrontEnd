@@ -20,7 +20,7 @@ const Login: React.FC = () => {
          */
         // alert(email);
         // alert(password);
-        redirect("/");
+        redirect("/Liste");
     }
 
     return (

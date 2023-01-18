@@ -1,17 +1,25 @@
 import { IonButtons, IonContent, IonHeader, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import EnchereItem from '../components/EnchereItem';
+import EnchereListItem from '../components/EnchereListItem';
+import FloatingAction from '../components/FloatingAction';
+import Enchere from '../model/Enchere';
 import './Page.css';
 
 const ListeEnchere: React.FC = () => {
-    const [encheres, setEncheres] = useState<any[]>();
+    const [encheres, setEncheres] = useState<Enchere[]>();
+
+    function getDataEncheres() {
+        const enchereList : Enchere[]  = [];
+        const e : Enchere = new Enchere();
+        e.setIdEnchere(1);
+        e.setDescription("Vente de vase");
+
+        enchereList.push(e);
+        setEncheres(enchereList);
+    }
 
     useEffect(()=>{
-        // fetch("https://alluring-coach-production.up.railway.app/avions").then((response) => {
-        //     return response.json();
-        // }).then((liste) =>{
-        //     setAvion(liste.data)
-        // })
+        getDataEncheres();
     },[]);
 
     return (
@@ -32,8 +40,9 @@ const ListeEnchere: React.FC = () => {
                 </IonToolbar>
                 </IonHeader>
                 <IonList>
-                    {encheres?.map((element:any)=> <EnchereItem encheres={element}/>)}
+                    {encheres?.map((element:any)=> <EnchereListItem encheres={element}/>)}
                 </IonList>
+                <FloatingAction />
             </IonContent>
         </IonPage>
     );
