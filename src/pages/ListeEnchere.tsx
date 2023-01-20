@@ -19,7 +19,12 @@ const ListeEnchere: React.FC = () => {
     }
 
     useEffect(()=>{
-        getDataEncheres();
+        fetch("http://localhost:8080/encheres").then((response) => {
+            return response.json();
+        }).then((liste) =>{
+            setEncheres(liste.data)
+        })
+        //getDataEncheres();
     },[]);
 
     return (
