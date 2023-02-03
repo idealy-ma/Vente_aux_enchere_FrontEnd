@@ -1,56 +1,46 @@
-import { IonButtons, IonContent, IonHeader, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import EnchereListItem from '../components/EnchereListItem';
-import FloatingAction from '../components/FloatingAction';
-import Enchere from '../model/Enchere';
-import './Page.css';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { groupEnd } from 'console';
+import { IonApp, IonBadge, IonButton, IonCheckbox, IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonModal, IonNote, IonPage, IonRow, IonThumbnail, IonTitle, IonToolbar } from '@ionic/react';
+import { close, closeCircle, logOut } from "ionicons/icons";
 
 const ListeEnchere: React.FC = () => {
-    const [encheres, setEncheres] = useState<Enchere[]>();
-
-    function getDataEncheres() {
-        const enchereList : Enchere[]  = [];
-        const e : Enchere = new Enchere();
-        e.setIdEnchere(1);
-        e.setDescription("Vente de vase");
-
-        enchereList.push(e);
-        setEncheres(enchereList);
-    }
-
-    useEffect(()=>{
-        fetch("http://localhost:8080/encheres").then((response) => {
-            return response.json();
-        }).then((liste) =>{
-            setEncheres(liste.data)
-        })
-        //getDataEncheres();
-    },[]);
-
+  const [list_,setList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://containers-us-west-145.railway.app:6046/encheres')
+      .then(data => data.json())
+      .then(res => {
+        setList(res.data);
+        setLoading(false);
+      })
+  }, [])
+    const groupList = list_.map(group => {
+      return (<tr key={group.idEnchere}>
+        <td style={{whiteSpace: 'nowrap'}}>{group.nomProduit}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{group.dateDebut}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{group.dateFin}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{group.prixMin}</td>
+      </tr>
+    )})
+  
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                <IonButtons slot="start">
-                    <IonMenuButton />
-                </IonButtons>
-                <IonTitle>Liste des Avions</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-
-            <IonContent fullscreen>
-                <IonHeader collapse="condense">
-                <IonToolbar>
-                    <IonTitle size="large">Liste des Avions</IonTitle>
-                </IonToolbar>
-                </IonHeader>
-                <IonList>
-                    {encheres?.map((element:any)=> <EnchereListItem encheres={element}/>)}
-                </IonList>
-                <FloatingAction />
-            </IonContent>
-        </IonPage>
+      <div>
+          <h3>Liste des avions</h3>
+           <table border={1} >
+              <tr>
+                <th>Nom du produit</th>
+                <th>Date debut</th>
+                <th>Date fin</th>
+                <th>Prix min</th>
+              </tr>
+                {groupList}
+            </table>         
+      </div>
+      
     );
-};
-
-export default ListeEnchere;
+  };
+  
+  export default ListeEnchere;
+  

@@ -1,60 +1,116 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar, NavContext } from '@ionic/react';
-import { personCircleOutline } from 'ionicons/icons';
-import { useCallback, useContext, useState } from 'react';
-import './Page.css';
+import React, { useRef, useState } from 'react';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonMenuButton, IonRow, IonCol, IonButton, IonList, IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
+import { Redirect, RouteComponentProps } from 'react-router';
 
-const Login: React.FC = () => {
-    const [email, setEmail] = useState('responsable@gmail.com');
-    const [password, setPassword] = useState('responsable');
+interface OwnProps extends RouteComponentProps {}
 
-    const {navigate} = useContext(NavContext);
 
-    const redirect = useCallback((link : string)=>{
-        navigate(link,"forward")
-    },[navigate]);    
+const Login:React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [error, setError] = useState('');
 
-    function login() {
-        alert("YOU HAVE TO IMPLEMENT THIS FUNCTIONNALITY");
-        /**
-         * 
-         */
-        // alert(email);
-        // alert(password);
-        redirect("/Liste");
+  const login = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    if(!username) {
+      setUsernameError(true);
+    }
+    if(!password) {
+      setPasswordError(true);
     }
 
-    return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                <IonButtons slot="start">
-                    <IonMenuButton />
-                </IonButtons>
-                <IonTitle>Login</IonTitle>
-                </IonToolbar>
-            </IonHeader>
+    if(username && password) {
+    }
+   fetch(
+    'https://containers-us-west-145.railway.app:6046/login',{
+      method: "POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({"email":username,"mdp":password})
+    })
+    .then((response )=>{
+      return response.json()
+    })
+    .then((res) => {
+      if(res.error!==undefined){
+        setError(res.error.message);
+      }
+      else{   
+          sessionStorage.setItem("userId",res.data.userId);
+          sessionStorage.setItem("hash",res.data.hash);
+          window.location.href="/lEnchere";
+          
+        }
+    });
+  };
 
-            <IonContent fullscreen>
-                <IonHeader collapse="condense">
-                    <IonToolbar>
-                        <IonTitle size="large">Login</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <IonItem>
-                    <IonIcon icon={personCircleOutline}></IonIcon>
-                </IonItem>
-                <IonItem>
-                    <IonLabel>Email</IonLabel>
-                    <IonInput onIonChange={(event:any)=>setEmail(event.target.value)} type="email" value={email}></IonInput>
-                </IonItem>
-                <IonItem>
-                    <IonLabel>Mot de passe</IonLabel>
-                    <IonInput onIonChange={(event:any)=>setPassword(event.target.value)} type="password" value={password}></IonInput>
-                </IonItem>
-                <IonButton expand='block' color='tertiary' onClick={login}>Login</IonButton>
-            </IonContent>
-        </IonPage>
-    );
+  return (
+    <IonPage id="login-page">
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Login</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+
+        <div className="login-logo">
+        </div>
+
+        <form onSubmit={login}>
+          <IonList>
+            <IonItem>
+              <IonLabel position="stacked" color="primary">Email</IonLabel>
+              <IonInput name="email" type="text" value={username} spellCheck={false} autocapitalize="off" onIonChange={e => setUsername(e.detail.value!)}
+                required>
+              </IonInput>
+            </IonItem>
+
+            {formSubmitted && usernameError && <IonText color="danger">
+              <p className="ion-padding-start">
+                Username is required
+              </p>
+            </IonText>}
+
+            <IonItem>
+              <IonLabel position="stacked" color="primary">Mot de passe</IonLabel>
+              <IonInput name="mdp" type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}>
+              </IonInput>
+            </IonItem>
+
+            {formSubmitted && passwordError && <IonText color="danger">
+              <p className="ion-padding-start">
+                Password is required
+              </p>
+            </IonText>}
+          </IonList>
+          {formSubmitted && error && <IonText color="danger">
+              <p className="ion-padding-start">
+                Error
+              </p>
+            </IonText>}
+          <IonRow>
+            <IonCol>
+              <IonButton type="submit" expand="block">Login</IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton routerLink="/inscription" color="light" expand="block">Inscription</IonButton>
+            </IonCol>
+          </IonRow>
+        </form>
+
+      </IonContent>
+
+    </IonPage>
+  );
 };
 
 export default Login;
+
+function useForm(): { control: any; handleSubmit: any; } {
+  throw new Error('Function not implemented.');
+}

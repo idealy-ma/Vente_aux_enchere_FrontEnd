@@ -1,8 +1,11 @@
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { Route } from 'react-router-dom';
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonSplitPane,
+  setupIonicReact
+} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
-import Menu from './components/Menu';
-import Page from './pages/Page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,42 +25,66 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import AvionList from './pages/ListeEnchere';
-import LoginPage from './pages/Login';
-import Detail from './pages/Detail';
-import Assurance from './pages/Assurance';
-import AssuranceList from './pages/AssuranceList';
+import Menu from './pages/Menu';
+import Login from './pages/Login';
+import Inscription from './pages/Inscription';
 import ListeEnchere from './pages/ListeEnchere';
-import DetailsEnchere from './pages/DetailsEnchere';
-import FloatingAction from './components/FloatingAction';
+import Compte from './pages/Compte';
+import RechargementCompte from './pages/RechargementCompte';
+import HistoriqueRechargement from './pages/HistoriqueRechargement';
+import Acceuil from './pages/Acceuil';
 
 setupIonicReact();
 
-const App: React.FC = () => {
-  return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <FloatingAction />
-          <IonRouterOutlet id="main">
-            <Route path="/" exact={true}>
-              <Redirect to="/Login" />
-            </Route>
-            <Route path="/Login" exact={true}>
-              <LoginPage />
-            </Route>
-            <Route path="/Liste" exact={true}>
-              <ListeEnchere />
-            </Route>
-            <Route path="/Details/:id" exact={true}>
-              <DetailsEnchere />
-            </Route>
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
-    </IonApp>
-  );
-};
+const App: React.FC = () => (
+  <IonApp>
+  <IonReactRouter>
+    <Route exact path="/" component={Login} />
+    <Route exact path="/login" component={Login} />
+    <Route exact path="/inscription" component={Inscription} />
+    <Route exact path="/menu" component={Menu} />
+    <Route exact path="/lEnchere">
+      <IonSplitPane contentId="main">
+        <Menu/>
+        <IonRouterOutlet id="main">
+            <ListeEnchere />
+        </IonRouterOutlet>
+      </IonSplitPane> 
+    </Route>
+    <Route exact path="/checkCompte">
+      <IonSplitPane contentId="main">
+        <Menu/>
+        <IonRouterOutlet id="main">
+            <Compte />
+        </IonRouterOutlet>
+      </IonSplitPane> 
+    </Route>
+    <Route exact path="/recharge">
+      <IonSplitPane contentId="main">
+        <Menu/>
+        <IonRouterOutlet id="main">
+            <RechargementCompte />
+        </IonRouterOutlet>
+      </IonSplitPane> 
+    </Route>
+    <Route exact path="/historique">
+      <IonSplitPane contentId="main">
+        <Menu/>
+        <IonRouterOutlet id="main">
+            <HistoriqueRechargement />
+        </IonRouterOutlet>
+      </IonSplitPane> 
+    </Route>
+    <Route exact path="/addEnchere">
+      <IonSplitPane contentId="main">
+        <Menu/>
+        <IonRouterOutlet id="main">
+            <Acceuil />
+        </IonRouterOutlet>
+      </IonSplitPane> 
+    </Route>
+</IonReactRouter>
+</IonApp>
+);
 
 export default App;
