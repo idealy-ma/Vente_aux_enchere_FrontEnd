@@ -1,4 +1,5 @@
 import { IonContent, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle } from '@ionic/react';
+import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { useLocation } from 'react-router-dom';
 
 interface lesMenus {

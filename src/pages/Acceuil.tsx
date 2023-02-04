@@ -24,7 +24,7 @@ const Acceuil: React.FC = () => {
 
 
     useEffect(()=>{
-        fetch("https://containers-us-west-145.railway.app:6046/categories").then((response) => {
+        fetch("https://vae-client-backend-production.up.railway.app/categories").then((response) => {
             return response.json();
         }).then((liste) =>{
             setCategorie(liste.data)
@@ -35,7 +35,7 @@ const Acceuil: React.FC = () => {
       var id:any=sessionStorage.getItem('userId'); 
         var hash:any=sessionStorage.getItem('hash'); 
         for (let index = 0; index < __photo.length; index++) {
-            fetch('https://containers-us-west-145.railway.app:6046/encheres',{
+            fetch('https://vae-client-backend-production.up.railway.app/encheres',{
               method: "POST",
               headers:{
                 "Content-Type":"application/json",

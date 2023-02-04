@@ -21,7 +21,7 @@ const userId = sessionStorage.getItem("userId");
       setMontantError(true);
     }
    fetch(
-    'https://containers-us-west-145.railway.app:6046/soldes',{
+    'https://vae-client-backend-production.up.railway.app/soldes',{
       method: "POST",
       headers:{
         "Content-Type":"application/json",

@@ -33,7 +33,7 @@ const Inscription:React.FC = () => {
     if(username && password && nom) {
     }
     fetch(
-      'https://containers-us-west-145.railway.app:6046/clients',{
+      'https://vae-client-backend-production.up.railway.app/clients',{
         method: "POST",
         headers:{
           "Content-Type":"application/json",

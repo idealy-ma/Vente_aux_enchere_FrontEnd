@@ -6,8 +6,8 @@ interface OwnProps extends RouteComponentProps {}
 
 
 const Login:React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('Anjara.Joston@gmail.com');
+  const [password, setPassword] = useState('anjara');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -26,7 +26,7 @@ const Login:React.FC = () => {
     if(username && password) {
     }
    fetch(
-    'https://containers-us-west-145.railway.app:6046/login',{
+    'https://vae-client-backend-production.up.railway.app/login',{
       method: "POST",
       headers:{
         "Content-Type":"application/json",

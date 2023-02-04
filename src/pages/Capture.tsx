@@ -61,7 +61,6 @@ const Capture: React.FC = () => {
                         ))}
                     </IonRow>
                     <div className="ion-text-center">
-                        Ajout photo(s)
                         <IonButton onClick={() => takePhoto()}>
                             <IonIcon icon={camera}></IonIcon>
                         </IonButton>
